@@ -1,12 +1,15 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const Author = require("./author");
+const Category = require("./category");
+const Review = require("./review");
+const Article = require("./article");
 
 const sequelize = new Sequelize( //AUTHORIIZES AND STARTS SEQUELIZE
-  process.env.PGDATABASE,
-  process.env.PGUSER,
-  process.env.PGPASSWORD,
+  process.env.PGDATABASE, //DATABASE NAME
+  process.env.PGUSER, //PG USERNAME
+  process.env.PGPASSWORD, //PG PASSWORD
   {
-    host: process.env.PGHOST,
+    host: process.env.PGHOST, //HOST NAME
     dialect: "postgres", //THIS IS THE LANGUAGE THAT WE ARE USING WITH SEQUELIZE
   }
 );
@@ -14,6 +17,9 @@ const sequelize = new Sequelize( //AUTHORIIZES AND STARTS SEQUELIZE
 const models = {
   //MODELS OF THE TABLES
   Author: Author(sequelize, DataTypes),
+  Category: Category(sequelize, DataTypes),
+  Review: Review(sequelize, DataTypes),
+  Article: Article(sequelize, DataTypes),
 };
 
 models.sequelize = sequelize;
