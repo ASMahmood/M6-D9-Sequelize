@@ -13,4 +13,14 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const allAuthors = await Author.findAll(); //.findAll RETURNS ALL OF THE AUTHORS
+    res.send(allAuthors);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Uh oh, something broke :(");
+  }
+});
+
 module.exports = router;
