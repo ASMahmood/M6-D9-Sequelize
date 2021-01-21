@@ -15,15 +15,23 @@ const sequelize = new Sequelize( //AUTHORIIZES AND STARTS SEQUELIZE
 );
 
 const models = {
-  //MODELS OF THE TABLES
+  //OBJECT CONTAINING MODELS OF THE TABLES
   Author: Author(sequelize, DataTypes),
   Category: Category(sequelize, DataTypes),
   Review: Review(sequelize, DataTypes),
   Article: Article(sequelize, DataTypes),
 };
 
-models.sequelize = sequelize;
-models.Sequelize = Sequelize;
+//GOES THROUGH EACH KEY OF THE MODEL OBJECT ABOVE (e.g. Author: Author(sequelize, DataTypes)) AND CREATES TABLE RELATIONS DEPENDING ON CODE INSIDE EACH MODEL
+Object.keys(models).forEach((modelName) => {
+  if ("associate" in models[modelName]) {
+    //IF THE WORD ASSOCIATE IS PRESENT INSIDE THE MODEL, IT WILL RUN THE FOLLOWING CODE
+    models[modelName].associate(models); //RUNS THE .associate INSIDE THE MODEL, WHICH IS CODE THAT DEFINES THE TABLES RELATIONS
+  }
+});
+
+models.sequelize = sequelize; //PUTS TABLE MODELS INTO SEQUELIZE
+models.Sequelize = Sequelize; //IDK WHAT THIS DOES :(
 
 sequelize
   .authenticate() //TESTS IF SEQUELIZE IS CONNECTED TO OUR DATABASE
@@ -39,4 +47,4 @@ sequelize
       console.log(e);
   });
 
-module.exports = models; //EXPORTS TABLE MODELS TO SERVER.JS
+module.exports = models; //EXPORTS SEQUELIZE CONTAINING TABLE MODELS TO SERVER.JS

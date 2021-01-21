@@ -8,7 +8,7 @@ const port = process.env.PORT || 8008;
 server.use(cors());
 server.use(express.json());
 
-database.sequelize.sync({ force: true }).then((result) => {
+database.sequelize.sync({ force: false }).then((result) => {
   server.listen(port, () => {
     console.log("Server is running away from " + port + " kurwas");
   });

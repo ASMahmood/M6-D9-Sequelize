@@ -18,5 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     { timestamps: false }
   );
+  Category.associate = (models) => {
+    //DEFINES RELATIONSHIPS AND FOREIGN KEYS
+    Category.hasMany(models.Article); //ONE-TO-MANY: CATEGORY IS ONE, ARTICLE IS MANY
+  };
   return Category;
 };

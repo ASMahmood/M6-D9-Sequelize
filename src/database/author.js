@@ -27,5 +27,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     { timestamps: false } //REMOVES TIMESTAMPS. ON BY DEFAULT
   );
+  Author.associate = (models) => {
+    //DEFINES RELATIONS. CODE IS TRIGGERED IN INDEX.JS
+    Author.hasMany(models.Article); //ONE-TO-MANY: AUTHOR IS ONE, ARTICLE IS MANY
+    Author.hasMany(models.Review); //ONE-TO-MANY: AUTHOR IS ONE, REVIEW IS MANY
+  };
   return Author; //RETURNS MODEL TO INDEX.JS
 };

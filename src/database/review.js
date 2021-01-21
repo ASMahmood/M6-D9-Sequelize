@@ -16,7 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     },
-    { timestamps: false }
+    { timestamps: true }
   );
+  Review.associate = (models) => {
+    Review.belongsTo(models.Article); //ONE-TO-MANY: REVIEW IS MANY, ARTICLE IS ONE
+    Review.belongsTo(models.Author); //ONE-TO-MANY: REVIEW IS MANY, AUTHOR IS ONE
+  };
   return Review;
 };
