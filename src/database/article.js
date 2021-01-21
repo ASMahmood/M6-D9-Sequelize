@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     },
-    { timestamps: false }
+    { timestamps: true }
   );
   Article.associate = (models) => {
     //DEFINES RELATIONSHIPS AND FOREIGN KEYS
